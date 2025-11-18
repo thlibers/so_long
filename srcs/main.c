@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:40:20 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/13 18:19:54 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:45:15 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@
 
 // int	main(int argc, char **argv)
 // {
-//     const char	*path = (argc > 1) ? argv[1] : "map.ber";
+//     char	*path = argv[1];
 //     t_game		game = {0};
 
 //     if (!parse_map(&game, (char *)path))
 //     {
-//         ft_printf("Error: parse_map failed\n");
 //         return (1);
 //     }
 //     if (!validate_map(&game))
@@ -75,14 +74,16 @@
 //         return (1);
 //     }
 // 	int y = 0;
+// 	ft_printf("\n");
 // 	while(game.map.grid[y])
 // 	{
 // 		printf("%s\n", game.map.grid[y]);
 // 		y++;
 // 	}
-
+// 	ft_printf("\n");
 //     ft_printf("Map loaded and valid: %dx%d, collectibles=%d\n",
 //         game.map.width, game.map.height, game.map.collectibles);
 //     free_grid(game.map.grid);
 //     return (0);
 // }
+

@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/13 18:15:42 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:58:38 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@
 typedef struct s_img
 {
 	void	*img;
-	char	*addr;
-	int		bpp;
 	int		line_len;
-	int		endian;
 	int		width;
 	int		height;
 }	t_img;
@@ -121,7 +118,7 @@ t_img	*load_xpm(t_game *game, char *path);
 /* render.c */
 void	render_map(t_game *game);
 void	render_tile(t_game *game, int x, int y);
-void	render_ui(t_game *game);
+void	render_moves(t_game *game);
 
 /* sprites.c */
 void	put_image(t_game *game, t_img *img, int x, int y);
@@ -143,12 +140,12 @@ void	print_moves(t_game *game);
 
 /* === UTILS === */
 /* error.c */
-void	error_exit(char *message);
-void	print_error(char *message);
+// void	error_exit(char *message);
+// void	print_error(char *message);
 
 /* cleanup.c */
-void	cleanup_game(t_game *game);
-void	free_map(char **map);
-void	destroy_images(t_game *game);
+// void	cleanup_game(t_game *game);
+// void	free_map(char **map);
+// void	destroy_images(t_game *game);
 
 # endif

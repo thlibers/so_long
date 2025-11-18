@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:22:18 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/13 18:08:48 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/18 11:28:30 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**read_map_file(char *filename)
 	while ((line = get_next_line(fd)))
 	{
 		if (!line)
-			break;
+			break ;
 		len = (int)ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';

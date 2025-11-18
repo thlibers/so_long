@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:07:11 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/13 16:21:42 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:10:06 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	check_walls(t_game *game)
 		while (x < game->map.width && (y == 0 || y == game->map.height - 1))
 		{
 			if (game->map.grid[y][x] != WALL)
-				return (ft_printf("invalid map : top/bottom border is not enclosed by walls\n"), 0);
+				return (ft_printf("invalid map : border is not walls\n"), 0);
 			x++;
 		}
-		if (game->map.grid[y][0] != WALL || game->map.grid[y][game->map.width - 1] != WALL)
-			return (ft_printf("invalid map : right/left border is not enclosed by walls\n"), 0);
+		if (game->map.grid[y][0] != WALL
+			|| game->map.grid[y][game->map.width - 1] != WALL)
+			return (ft_printf("invalid map : border is not walls\n"), 0);
 		y++;
 	}
 	return (1);
@@ -41,7 +42,7 @@ int	check_elements(t_game *game)
 	int		x;
 	int		y;
 	char	c;
-	
+
 	if (!game || !game->map.grid)
 		return (ft_printf("Invalid map : grid doesn't exist\n"), 0);
 	y = 0;
@@ -51,7 +52,8 @@ int	check_elements(t_game *game)
 		while (game->map.grid[y][x])
 		{
 			c = game->map.grid[y][x];
-			if (c != WALL && c != EMPTY && c != COLLECTIBLE && c != EXIT && c != PLAYER)
+			if (c != WALL && c != EMPTY && c != COLLECTIBLE && c != EXIT
+				&& c != PLAYER)
 				return (ft_printf("Invalid map : unknown character\n"), 0);
 			x++;
 		}
@@ -60,14 +62,14 @@ int	check_elements(t_game *game)
 	return (1);
 }
 
-int check_at_least_one(t_game *game)
+int	check_at_least_one(t_game *game)
 {
-	if(!game)
+	if (!game)
 		return (ft_printf("Invalid map : game is NULL\n"), 0);
 	if (game->map.players != 1)
 		return (ft_printf("Invalid map : 1 player required\n"), 0);
 	if (game->map.collectibles < 1)
-		return (ft_printf("Invalid map : at least one collectible required\n"), 0);
+		return (ft_printf("Invalid map : at least one collectible\n"), 0);
 	if (game->map.exits != 1)
 		return (ft_printf("Invalid map : 1 exit required\n"), 0);
 	return (1);
@@ -87,7 +89,7 @@ int	check_rectangular(t_game *game)
 	while (y < game->map.height)
 	{
 		if ((int)ft_strlen(game->map.grid[y]) != x)
-			return (ft_printf("invalid map : the map must be rectangular\n"), 0);
+			return (ft_printf("invalid map : the map is not rectangular\n"), 0);
 		y++;
 	}
 	return (1);

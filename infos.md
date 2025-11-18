@@ -11,8 +11,9 @@ path_checker.c - Vérification du chemin avec flood fill
 
 Graphics
 
-init_mlx.c - Initialisation de MLX et chargement des sprites
+init_window.c - Initialisation de MLX et chargement des sprites 
 render.c - Rendu de la carte et de l'interface
+sprites.c - Affiche une image (t_img) à la position en pixels (x, y) dans la fenêtre.
 
 Game
 
