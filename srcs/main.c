@@ -6,13 +6,28 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:40:20 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/14 14:45:15 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:52:08 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-/* ==========afficher une fenetre========== */
+// static void	free_grid(char **grid)
+// {
+//     int i;
+
+//     if (!grid)
+//         return ;
+//     i = 0;
+//     while (grid[i])
+//     {
+//         free(grid[i]);
+//         i++;
+//     }
+//     free(grid);
+// }
+
+/* ========== ouvrir une fenetre ========== */
 
 // int main(void)
 // {
@@ -35,27 +50,11 @@
 //     return (0);
 // }
 
-/* ==========afficher la map et verifier le parsing========== */
-
-// #include "../includes/so_long.h"
-
-// static void	free_grid(char **grid)
-// {
-//     int i;
-
-//     if (!grid)
-//         return ;
-//     i = 0;
-//     while (grid[i])
-//     {
-//         free(grid[i]);
-//         i++;
-//     }
-//     free(grid);
-// }
+/* ========== afficher le fichier map et verifier le parsing ========== */
 
 // int	main(int argc, char **argv)
 // {
+// 	(void)argc;
 //     char	*path = argv[1];
 //     t_game		game = {0};
 
@@ -87,3 +86,50 @@
 //     return (0);
 // }
 
+/* ========== afficher la map dans la fenetre ========== */
+
+// int	main(int argc, char **argv)
+// {
+// 	(void)argc;
+//     char	*path = argv[1];
+//     t_game		game = {0};
+
+//     if (!parse_map(&game, (char *)path))
+//         return (1);
+//     if (!validate_map(&game))
+//     {
+//         free_grid(game.map.grid);
+//         return (1);
+//     }
+//     if (!check_valid_path(&game))
+//     {
+//         free_grid(game.map.grid);
+//         return (1);
+//     }
+//     init_mlx(&game);
+// 	render_map(&game);
+// 	mlx_loop(game.mlx);
+//     free_grid(game.map.grid);
+//     return (0);
+// }
+
+/* ========== afficher le jeu avec les commandes ========== */
+
+int	main(int ac, char **av)
+{
+	t_game	game;
+
+	if (ac != 2)
+		return (ft_printf("Too many files.\n"), 0);
+	ft_memset(&game, 0, sizeof(t_game));
+	if (!parse_map(&game, av[1]) || !validate_map(&game)
+		|| !check_valid_path(&game))
+		return (ft_printf("Invalid map :\n"), 0);
+	if (!init_mlx(&game))
+		return (ft_printf("Initialization failed :\n"), 0);
+	render_map(&game);
+	mlx_hook(game.win, KEY_PRESS, 1L << 0, handle_keypress, &game);
+	mlx_hook(game.win, DESTROY_NOTIFY, 0, handle_close, &game);
+	mlx_loop(game.mlx);
+	return (0);
+}

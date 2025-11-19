@@ -1,5 +1,5 @@
 # Nom du programme
-NAME = so_long.a
+NAME = so_long
 
 # Compilateur et flags
 CC = cc

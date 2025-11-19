@@ -6,23 +6,23 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/17 13:58:38 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:44:08 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include "../mylibft/get_next_line.h"
-#include "../mylibft/printf.h"
-#include "../mylibft/libft.h"
-#include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
+# include "../mylibft/get_next_line.h"
+# include "../mylibft/libft.h"
+# include "../mylibft/printf.h"
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 /* Taille des sprites */
-# define TILE_SIZE 64
+# define TILE_SIZE 32
 
 /* Codes de touches */
 # define KEY_W 119
@@ -54,14 +54,14 @@ typedef struct s_img
 	int		line_len;
 	int		width;
 	int		height;
-}	t_img;
+}			t_img;
 
 /* Structure pour la position */
 typedef struct s_pos
 {
-	int	x;
-	int	y;
-}	t_pos;
+	int		x;
+	int		y;
+}			t_pos;
 
 /* Structure pour la carte */
 typedef struct s_map
@@ -74,7 +74,7 @@ typedef struct s_map
 	int		players;
 	t_pos	player_pos;
 	t_pos	exit_pos;
-}	t_map;
+}			t_map;
 
 /* Structure principale du jeu */
 typedef struct s_game
@@ -90,53 +90,51 @@ typedef struct s_game
 	int		collected;
 	int		moves;
 	int		game_over;
-}	t_game;
+}			t_game;
 
 /* === PARSING === */
 /* map_parser.c */
-int		parse_map(t_game *game, char *filename);
-char	**read_map_file(char *filename);
-int		get_map_width(char **grid);
+int			parse_map(t_game *game, char *filename);
+char		**read_map_file(char *filename);
+int			get_map_width(char **grid);
 
 /* map_validation.c */
-int		validate_map(t_game *game);
-int		check_walls(t_game *game);
-int		check_elements(t_game *game);
-int		check_at_least_one(t_game *game);
-int		check_rectangular(t_game *game);
+int			validate_map(t_game *game);
+int			check_walls(t_game *game);
+int			check_elements(t_game *game);
+int			check_at_least_one(t_game *game);
+int			check_rectangular(t_game *game);
 
 /* path_checker.c */
-int		check_valid_path(t_game *game);
-void	flood_fill(char **map, t_pos pos, t_pos size);
+int			check_valid_path(t_game *game);
+void		flood_fill(char **map, t_pos pos, t_pos size);
 
 /* === GRAPHICS === */
 /* init_mlx.c */
-int		init_mlx(t_game *game);
-int		load_sprites(t_game *game);
-t_img	*load_xpm(t_game *game, char *path);
+int			init_mlx(t_game *game);
+int			load_sprites(t_game *game);
 
 /* render.c */
-void	render_map(t_game *game);
-void	render_tile(t_game *game, int x, int y);
-void	render_moves(t_game *game);
+void		render_map(t_game *game);
+void		render_tile(t_game *game, int x, int y);
+void		render_moves(t_game *game);
 
 /* sprites.c */
-void	put_image(t_game *game, t_img *img, int x, int y);
+void		put_image(t_game *game, t_img *img, int x, int y);
 
 /* === GAME === */
 /* movement.c */
-void	move_player(t_game *game, int dx, int dy);
-int		can_move(t_game *game, int new_x, int new_y);
-void	update_player_position(t_game *game, int new_x, int new_y);
+void		move_player(t_game *game, int dx, int dy);
+int			can_move(t_game *game, int new_x, int new_y);
+void		update_player_position(t_game *game, int new_x, int new_y);
 
 /* events.c */
-int		handle_keypress(int keycode, t_game *game);
-int		handle_close(t_game *game);
+int			handle_keypress(int keycode, t_game *game);
+int			handle_close(t_game *game);
 
 /* game_logic.c */
-void	collect_item(t_game *game, int x, int y);
-void	check_win(t_game *game);
-void	print_moves(t_game *game);
+void		collect_item(t_game *game, int x, int y);
+void		check_win(t_game *game);
 
 /* === UTILS === */
 /* error.c */
@@ -148,4 +146,4 @@ void	print_moves(t_game *game);
 // void	free_map(char **map);
 // void	destroy_images(t_game *game);
 
-# endif
+#endif
