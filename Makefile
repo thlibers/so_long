@@ -26,7 +26,6 @@ SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/parsing/path_checker.c \
        $(SRC_DIR)/graphics/init_window.c \
        $(SRC_DIR)/graphics/render.c \
-       $(SRC_DIR)/graphics/sprites.c \
        $(SRC_DIR)/game/movement.c \
        $(SRC_DIR)/game/events.c \
        $(SRC_DIR)/game/game_logic.c \

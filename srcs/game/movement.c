@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:59:01 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 18:52:52 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:40:01 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	move_player(t_game *game, int dx, int dy)
 	new_y = game->map.player_pos.y + dy;
 	if (can_move(game, new_x, new_y))
 	{
-		update_player_position(game, new_x, new_y);
 		game->moves++;
+		update_player_position(game, new_x, new_y);
 		ft_printf("Moves : %d\n", game->moves);
 	}
 }

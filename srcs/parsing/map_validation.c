@@ -6,13 +6,13 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:07:11 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 17:45:44 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:51:06 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-int	check_walls(t_game *game)
+static int	check_walls(t_game *game)
 {
 	int	x;
 	int	y;
@@ -37,7 +37,7 @@ int	check_walls(t_game *game)
 	return (1);
 }
 
-int	check_elements(t_game *game)
+static int	check_elements(t_game *game)
 {
 	int		x;
 	int		y;
@@ -62,7 +62,7 @@ int	check_elements(t_game *game)
 	return (1);
 }
 
-int	check_at_least_one(t_game *game)
+static int	check_at_least_one(t_game *game)
 {
 	if (!game)
 		return (ft_printf("Invalid map : game is NULL.\n"), 0);
@@ -75,7 +75,7 @@ int	check_at_least_one(t_game *game)
 	return (1);
 }
 
-int	check_rectangular(t_game *game)
+static int	check_rectangular(t_game *game)
 {
 	int	x;
 	int	y;

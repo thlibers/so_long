@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:45:25 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 17:47:36 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:57:55 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_img	*load_xpm(t_game *game, char *path)
 	return (tex);
 }
 
-int	load_sprites(t_game *game)
+static int	load_sprites(t_game *game)
 {
 	game->player = NULL;
 	game->wall = NULL;

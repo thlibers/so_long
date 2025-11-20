@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:22:18 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/18 15:34:57 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:49:36 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,19 @@ static char	**new_grid(char **grid, int size, char *line)
 	return (newgrid);
 }
 
-char	**read_map_file(char *filename)
+char	**read_map_file(int fd)
 {
-	int		fd;
 	char	*line;
 	char	**grid;
 	int		size;
 	int		len;
 
-	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	grid = NULL;
 	size = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (!line)
 			break ;
@@ -56,12 +55,13 @@ char	**read_map_file(char *filename)
 		free(line);
 		if (!grid)
 			return (close(fd), NULL);
+		line = get_next_line(fd);
 		size++;
 	}
 	return (close(fd), grid);
 }
 
-int	get_map_width(char **grid)
+static int	get_map_width(char **grid)
 {
 	if (!grid || !grid[0])
 		return (0);
@@ -101,9 +101,11 @@ int	parse_map(t_game *game, char *filename)
 {
 	char	**grid;
 	int		height;
+	int		fd;
 	int		y;
 
-	grid = read_map_file(filename);
+	fd = open(filename, O_RDONLY);
+	grid = read_map_file(fd);
 	if (!grid)
 	{
 		ft_printf("Failed to read map file.\n");

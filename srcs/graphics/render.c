@@ -6,13 +6,20 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:45:29 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 17:48:59 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:00:38 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-void	render_tile(t_game *game, int x, int y)
+static void	put_sprite(t_game *game, t_img *img, int x, int y)
+{
+	if (!game || !game->mlx || !game->win || !img || !img->img)
+		return ;
+	mlx_put_image_to_window(game->mlx, game->win, img->img, x, y);
+}
+
+static void	render_tile(t_game *game, int x, int y)
 {
 	t_img	*tex;
 	char	c;
@@ -32,10 +39,10 @@ void	render_tile(t_game *game, int x, int y)
 	else if (c == COLLECTIBLE)
 		tex = game->collectible;
 	if (tex)
-		put_image(game, tex, x * TILE_SIZE, y * TILE_SIZE);
+		put_sprite(game, tex, x * TILE_SIZE, y * TILE_SIZE);
 }
 
-void	render_moves(t_game *game)
+static void	render_moves(t_game *game)
 {
 	char	*move_str;
 	char	*moves;

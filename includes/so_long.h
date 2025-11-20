@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 17:44:08 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:01:03 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,32 +95,21 @@ typedef struct s_game
 /* === PARSING === */
 /* map_parser.c */
 int			parse_map(t_game *game, char *filename);
-char		**read_map_file(char *filename);
-int			get_map_width(char **grid);
+char		**read_map_file(int fd);
 
 /* map_validation.c */
 int			validate_map(t_game *game);
-int			check_walls(t_game *game);
-int			check_elements(t_game *game);
-int			check_at_least_one(t_game *game);
-int			check_rectangular(t_game *game);
 
 /* path_checker.c */
 int			check_valid_path(t_game *game);
 void		flood_fill(char **map, t_pos pos, t_pos size);
 
 /* === GRAPHICS === */
-/* init_mlx.c */
+/* init_window.c */
 int			init_mlx(t_game *game);
-int			load_sprites(t_game *game);
 
 /* render.c */
 void		render_map(t_game *game);
-void		render_tile(t_game *game, int x, int y);
-void		render_moves(t_game *game);
-
-/* sprites.c */
-void		put_image(t_game *game, t_img *img, int x, int y);
 
 /* === GAME === */
 /* movement.c */
@@ -135,15 +124,5 @@ int			handle_close(t_game *game);
 /* game_logic.c */
 void		collect_item(t_game *game, int x, int y);
 void		check_win(t_game *game);
-
-/* === UTILS === */
-/* error.c */
-// void	error_exit(char *message);
-// void	print_error(char *message);
-
-/* cleanup.c */
-// void	cleanup_game(t_game *game);
-// void	free_map(char **map);
-// void	destroy_images(t_game *game);
 
 #endif
