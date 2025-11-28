@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/20 15:01:03 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:42:14 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-/* Taille des sprites */
 # define TILE_SIZE 32
 
-/* Codes de touches */
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -35,19 +33,19 @@
 # define KEY_DOWN 65364
 # define KEY_RIGHT 65363
 
-/* Codes d'événements MLX */
+/* Event MLX */
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
 # define DESTROY_NOTIFY 17
 
-/* Éléments de la carte */
+/* Map items */
 # define WALL '1'
 # define EMPTY '0'
 # define COLLECTIBLE 'C'
 # define EXIT 'E'
 # define PLAYER 'P'
 
-/* Structure pour les images/sprites */
+/* Sprites */
 typedef struct s_img
 {
 	void	*img;
@@ -56,14 +54,14 @@ typedef struct s_img
 	int		height;
 }			t_img;
 
-/* Structure pour la position */
+/* Pos */
 typedef struct s_pos
 {
 	int		x;
 	int		y;
 }			t_pos;
 
-/* Structure pour la carte */
+/* Map */
 typedef struct s_map
 {
 	char	**grid;
@@ -76,7 +74,7 @@ typedef struct s_map
 	t_pos	exit_pos;
 }			t_map;
 
-/* Structure principale du jeu */
+/* Game */
 typedef struct s_game
 {
 	void	*mlx;
@@ -102,7 +100,6 @@ int			validate_map(t_game *game);
 
 /* path_checker.c */
 int			check_valid_path(t_game *game);
-void		flood_fill(char **map, t_pos pos, t_pos size);
 
 /* === GRAPHICS === */
 /* init_window.c */
@@ -120,9 +117,5 @@ void		update_player_position(t_game *game, int new_x, int new_y);
 /* events.c */
 int			handle_keypress(int keycode, t_game *game);
 int			handle_close(t_game *game);
-
-/* game_logic.c */
-void		collect_item(t_game *game, int x, int y);
-void		check_win(t_game *game);
 
 #endif

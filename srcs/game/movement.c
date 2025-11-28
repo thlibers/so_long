@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:59:01 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/20 14:40:01 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 14:31:21 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	can_move(t_game *game, int new_x, int new_y)
 	if (tile == EXIT && game->collected == game->map.collectibles)
 	{
 		game->moves++;
-		ft_printf("You won ! Total moves : %d\n", game->moves);
+		ft_printf("✨ Congratulation ! You won ! 🎉\n");
+		ft_printf("Total moves : %d\n", game->moves);
 		game->game_over = 1;
 		handle_close(game);
 	}

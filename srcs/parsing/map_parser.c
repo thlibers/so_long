@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:22:18 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/20 14:49:36 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 13:09:50 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	parse_map(t_game *game, char *filename)
 	grid = read_map_file(fd);
 	if (!grid)
 	{
-		ft_printf("Failed to read map file.\n");
+		ft_printf("failed to read file or empty map\n");
 		return (0);
 	}
 	height = 0;

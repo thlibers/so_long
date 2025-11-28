@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:58:58 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 17:53:10 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 14:23:20 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_win(t_game *game)
 	{
 		if (game->map.grid[p_pos_y][p_pos_x] == EXIT)
 		{
-			ft_printf("Congratulation ! You won !\n");
+			ft_printf("✨ Congratulation ! You won ! 🎉\n");
 			ft_printf("Total moves : %d\n", game->moves);
 			game->game_over = 1;
 			handle_close(game);

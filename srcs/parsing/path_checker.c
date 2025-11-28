@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 13:30:49 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/20 14:53:25 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 15:39:33 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	**dup_grid(char **grid, int height)
 	return (dup);
 }
 
-void	flood_fill(char **map, t_pos pos, t_pos size)
+static void	flood_fill(char **map, t_pos pos, t_pos size)
 {
 	if (!map)
 		return ;
@@ -81,7 +81,7 @@ static int	reachable_check(t_game *game, char **grid)
 		while (grid[y][x])
 		{
 			if (grid[y][x] == COLLECTIBLE || grid[y][x] == EXIT)
-				return (ft_printf("Invalid map : unreachable C or E.\n"), 0);
+				return (ft_printf("Invalid map : unreachable C or E\n"), 0);
 			x++;
 		}
 		y++;
@@ -96,19 +96,19 @@ int	check_valid_path(t_game *game)
 	int		check;
 
 	if (!game || !game->map.grid)
-		return (ft_printf("Path check error: game or map is NULL.\n"), 0);
+		return (ft_printf("Path check error\n"), 0);
 	size.x = game->map.width;
 	size.y = game->map.height;
 	if (game->map.player_pos.x < 0 || game->map.player_pos.y < 0
 		|| game->map.player_pos.x >= size.x || game->map.player_pos.y >= size.y)
 	{
-		ft_printf("path ckeck error (player position).\n");
+		ft_printf("path ckeck error : player out of map\n");
 		return (0);
 	}
 	grid = dup_grid(game->map.grid, game->map.height);
 	if (!grid)
 	{
-		ft_printf("Path check error (memory).\n");
+		ft_printf("Path check error\n");
 		return (0);
 	}
 	flood_fill(grid, game->map.player_pos, size);
