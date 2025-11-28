@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:58:54 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/19 18:52:26 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:38:32 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,12 @@ int	handle_keypress(int keycode, t_game *game)
 	return (0);
 }
 
-static void	free_map(t_game *game)
+void	free_map(t_game *game)
 {
-	int	i;
-
 	if (game->map.grid)
-	{
-		i = 0;
-		while (i < game->map.height)
-			free(game->map.grid[i++]);
-		free(game->map.grid);
-	}
+		free_grid(game->map.grid, game->map.height);
+	if (game->map.grid_cpy)
+		free_grid(game->map.grid_cpy, game->map.height);
 	if (game->player)
 		free(game->player);
 	if (game->exit)

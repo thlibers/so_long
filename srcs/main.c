@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:40:20 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/28 11:50:46 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:22:06 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		ft_printf("Too few/many files.\n");
-		return (0);
+		return (1);
 	}
 	ft_memset(&game, 0, sizeof(t_game));
 	if (!parse_map(&game, av[1]) || !validate_map(&game)
 		|| !check_valid_path(&game))
-		return (0);
+		return (free_map(&game), 1);
 	if (!init_mlx(&game))
 	{
 		ft_printf("Initialization failed\n");
-		return (0);
+		return (free_map(&game), 1);
 	}
 	render_map(&game);
 	mlx_hook(game.win, KEY_PRESS, 1L << 0, handle_keypress, &game);

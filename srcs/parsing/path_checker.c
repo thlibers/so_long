@@ -6,13 +6,13 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 13:30:49 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/28 15:39:33 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:59:36 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-static void	free_grid(char **grid, int height)
+void	free_grid(char **grid, int height)
 {
 	int	i;
 
@@ -54,19 +54,26 @@ static char	**dup_grid(char **grid, int height)
 	return (dup);
 }
 
-static void	flood_fill(char **map, t_pos pos, t_pos size)
+static void	flood_fill(char **map, t_pos pos, t_pos size, int *coll_count)
 {
+	char	tmp;
+
 	if (!map)
 		return ;
 	if (pos.x < 0 || pos.y < 0 || pos.x >= size.x || pos.y >= size.y)
 		return ;
 	if (map[pos.y][pos.x] == WALL || map[pos.y][pos.x] == 'V')
 		return ;
+	tmp = map[pos.y][pos.x];
 	map[pos.y][pos.x] = 'V';
-	flood_fill(map, (t_pos){pos.x, pos.y + 1}, size);
-	flood_fill(map, (t_pos){pos.x, pos.y - 1}, size);
-	flood_fill(map, (t_pos){pos.x + 1, pos.y}, size);
-	flood_fill(map, (t_pos){pos.x - 1, pos.y}, size);
+	if (tmp == EXIT)
+		return ;
+	if (tmp == COLLECTIBLE)
+		(*coll_count)++;
+	flood_fill(map, (t_pos){pos.x, pos.y + 1}, size, coll_count);
+	flood_fill(map, (t_pos){pos.x, pos.y - 1}, size, coll_count);
+	flood_fill(map, (t_pos){pos.x + 1, pos.y}, size, coll_count);
+	flood_fill(map, (t_pos){pos.x - 1, pos.y}, size, coll_count);
 }
 
 static int	reachable_check(t_game *game, char **grid)
@@ -91,28 +98,28 @@ static int	reachable_check(t_game *game, char **grid)
 
 int	check_valid_path(t_game *game)
 {
-	char	**grid;
 	t_pos	size;
 	int		check;
+	int		coll_count;
 
+	coll_count = 0;
 	if (!game || !game->map.grid)
 		return (ft_printf("Path check error\n"), 0);
 	size.x = game->map.width;
 	size.y = game->map.height;
 	if (game->map.player_pos.x < 0 || game->map.player_pos.y < 0
 		|| game->map.player_pos.x >= size.x || game->map.player_pos.y >= size.y)
+		return (ft_printf("path ckeck error : player out of map\n"), 0);
+	game->map.grid_cpy = dup_grid(game->map.grid, game->map.height);
+	if (!game->map.grid_cpy)
+		return (ft_printf("Path check error\n"), 0);
+	flood_fill(game->map.grid_cpy, game->map.player_pos, size, &coll_count);
+	if (coll_count != game->map.collectibles)
 	{
-		ft_printf("path ckeck error : player out of map\n");
+		ft_printf("so_long: Collectible error, expected %d, %d reachable\n",
+			game->map.collectibles, coll_count);
 		return (0);
 	}
-	grid = dup_grid(game->map.grid, game->map.height);
-	if (!grid)
-	{
-		ft_printf("Path check error\n");
-		return (0);
-	}
-	flood_fill(grid, game->map.player_pos, size);
-	check = reachable_check(game, grid);
-	free_grid(grid, game->map.height);
+	check = reachable_check(game, game->map.grid_cpy);
 	return (check);
 }

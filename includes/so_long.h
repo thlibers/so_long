@@ -6,7 +6,7 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:27:39 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/28 15:42:14 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 16:37:04 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_pos
 typedef struct s_map
 {
 	char	**grid;
+	char	**grid_cpy;
 	int		width;
 	int		height;
 	int		collectibles;
@@ -100,6 +101,7 @@ int			validate_map(t_game *game);
 
 /* path_checker.c */
 int			check_valid_path(t_game *game);
+void		free_grid(char **grid, int height);
 
 /* === GRAPHICS === */
 /* init_window.c */
@@ -117,5 +119,6 @@ void		update_player_position(t_game *game, int new_x, int new_y);
 /* events.c */
 int			handle_keypress(int keycode, t_game *game);
 int			handle_close(t_game *game);
+void		free_map(t_game *game);
 
 #endif
