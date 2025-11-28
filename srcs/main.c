@@ -6,11 +6,41 @@
 /*   By: thlibers <thlibers@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 15:40:20 by thlibers          #+#    #+#             */
-/*   Updated: 2025/11/20 15:08:48 by thlibers         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:18:23 by thlibers         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+/* ========== afficher le jeu avec les commandes ========== */
+
+int	main(int ac, char **av)
+{
+	t_game	game;
+
+	if (ac != 2)
+	{
+		ft_printf("Too few/many files.\n");
+		return (0);
+	}
+	ft_memset(&game, 0, sizeof(t_game));
+	if (!parse_map(&game, av[1]) || !validate_map(&game)
+		|| !check_valid_path(&game))
+	{
+		ft_printf("Invalid map :\n");
+		return (0);
+	}
+	if (!init_mlx(&game))
+	{
+		ft_printf("Initialization failed :\n");
+		return (0);
+	}
+	render_map(&game);
+	mlx_hook(game.win, KEY_PRESS, 1L << 0, handle_keypress, &game);
+	mlx_hook(game.win, DESTROY_NOTIFY, 0, handle_close, &game);
+	mlx_loop(game.mlx);
+	return (0);
+}
 
 // static void	free_grid(char **grid)
 // {
@@ -112,33 +142,3 @@
 //     free_grid(game.map.grid);
 //     return (0);
 // }
-
-/* ========== afficher le jeu avec les commandes ========== */
-
-int	main(int ac, char **av)
-{
-	t_game	game;
-
-	if (ac != 2)
-	{
-		ft_printf("Too many files.\n");
-		return (0);
-	}
-	ft_memset(&game, 0, sizeof(t_game));
-	if (!parse_map(&game, av[1]) || !validate_map(&game)
-		|| !check_valid_path(&game))
-	{
-		ft_printf("Invalid map :\n");
-		return (0);
-	}
-	if (!init_mlx(&game))
-	{
-		ft_printf("Initialization failed :\n");
-		return (0);
-	}
-	render_map(&game);
-	mlx_hook(game.win, KEY_PRESS, 1L << 0, handle_keypress, &game);
-	mlx_hook(game.win, DESTROY_NOTIFY, 0, handle_close, &game);
-	mlx_loop(game.mlx);
-	return (0);
-}
